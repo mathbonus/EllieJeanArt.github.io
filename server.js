@@ -9,6 +9,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // available in every template
 app.locals.board = data.board;
+app.locals.base = '/';
 
 const byKind = (kind) => data.memories.filter((m) => m.kind === kind);
 

@@ -2,7 +2,7 @@
   <svg class="hook" viewBox="0 0 60 40" width="64" height="42" aria-hidden="true">
     <path d="M30 16 V10 a6 6 0 1 0 -6 -6 M30 16 L3 36 H57 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
   </svg>
-  <a class="tag-card" href="/memory/<%= m.id %>">
+  <a class="tag-card" href="<%= base %>memory/<%= m.id %>/">
     <%- include('pin', { m }) %>
     <strong class="hand"><%= m.title %></strong>
     <small><%= m.year %> · <%= m.mood %></small>

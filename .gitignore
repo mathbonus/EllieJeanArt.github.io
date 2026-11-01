@@ -1,16 +1,2 @@
-node_modules/
-
-# Local environment variables
-.env
-.env.*
-!.env.example
-
-# Logs and test output
-*.log
-npm-debug.log*
-coverage/
-
-# OS and editor files
-.DS_Store
-Thumbs.db
-.idea/
+node_modules
+dist

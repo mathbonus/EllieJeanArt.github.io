@@ -2,7 +2,7 @@
 <%- include('partials/header') %>
 
 <main class="memory">
-  <p class="crumbs"><a href="/">← back to the closet</a> / <%= m.kind %></p>
+  <p class="crumbs"><a href="<%= base %>">← back to the closet</a> / <%= m.kind %></p>
 
   <article class="memory-grid">
     <div class="memory-pin">
@@ -24,8 +24,8 @@
   </article>
 
   <nav class="pager">
-    <a href="/memory/<%= prev.id %>">← <%= prev.title %></a>
-    <a href="/memory/<%= next.id %>"><%= next.title %> →</a>
+    <a href="<%= base %>memory/<%= prev.id %>/">← <%= prev.title %></a>
+    <a href="<%= base %>memory/<%= next.id %>/"><%= next.title %> →</a>
   </nav>
 
   <% if (related.length) { %>
@@ -33,7 +33,7 @@
     <h2 class="hand">same feeling, other hangers</h2>
     <div class="related-grid">
       <% related.forEach((r) => { %>
-        <a class="tag-card" href="/memory/<%= r.id %>">
+        <a class="tag-card" href="<%= base %>memory/<%= r.id %>/">
           <%- include('partials/pin', { m: r }) %>
           <strong class="hand"><%= r.title %></strong>
           <small><%= r.year %></small>

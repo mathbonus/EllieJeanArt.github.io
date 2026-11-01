@@ -1,9 +1,9 @@
 <header class="site-header">
-  <a class="logo hand" href="/">✦ <%= board.name %></a>
+  <a class="logo hand" href="<%= base %>">✦ <%= board.name %></a>
   <nav>
-    <a href="/#closet">closet</a>
-    <a href="/#shelf">shelf</a>
-    <a href="/#dresser">dresser</a>
+    <a href="<%= base %>#closet">closet</a>
+    <a href="<%= base %>#shelf">shelf</a>
+    <a href="<%= base %>#dresser">dresser</a>
     <a href="<%= board.url %>" target="_blank" rel="noopener">pinterest ↗</a>
   </nav>
   <div class="tools">

@@ -44,7 +44,7 @@
           <div class="box-body">
             <%- include('partials/pin', { m }) %>
             <p><%= m.note %></p>
-            <a class="more" href="/memory/<%= m.id %>">open this one →</a>
+            <a class="more" href="<%= base %>memory/<%= m.id %>/">open this one →</a>
           </div>
         </article>
       <% }) %>
@@ -68,7 +68,7 @@
               <div class="ph mini"><span>pin</span></div>
               <div class="ph mini"><span>pin</span></div>
             </div>
-            <p><%= m.note %> <a class="more" href="/memory/<%= m.id %>">open →</a></p>
+            <p><%= m.note %> <a class="more" href="<%= base %>memory/<%= m.id %>/">open →</a></p>
           </div>
         </div>
       <% }) %>
