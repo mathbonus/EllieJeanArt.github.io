@@ -3,74 +3,63 @@
 
 <main>
   <section class="hero">
-    <p class="kicker">a board, rebuilt as a room</p>
-    <h1 class="hand">open the closet.<br><em>everything you kept is still in here.</em></h1>
-    <button class="btn" type="button" data-toggle-closet>open / close doors</button>
+    <div class="profile-stamp">
+      <img src="<%= board.profileImage %>" alt="Profile portrait for <%= board.owner %>" width="100" height="100">
+    </div>
+    <p class="kicker">a portfolio, gathered in one place</p>
+    <h1 class="hand">my memory closet.<br><em>art, collected by section.</em></h1>
+    <p class="hero-note">Choose a collection to explore all <%= totalPins %> pins on Pinterest.</p>
   </section>
 
-  <section id="closet" class="closet-wrap">
-    <b class="anno" style="top:-6px;left:4%">① doors = intro / reveal state</b>
-
-    <div class="filters" role="group" aria-label="Filter by mood">
-      <span class="hand">sort the rail by mood:</span>
-      <% moods.forEach((mood, k) => { %>
-        <button type="button" class="chip<%= k === 0 ? ' active' : '' %>" data-mood="<%= mood %>"><%= mood %></button>
-      <% }) %>
-    </div>
-
-    <div class="closet" id="closet-box">
-      <div class="interior">
-        <div class="rail"><b class="anno" style="top:-26px;right:6px">② rail = pins hang as clothes</b></div>
-        <ul class="hangers">
-          <% hangers.forEach((m, i) => { %>
-            <%- include('partials/hanger', { m, i }) %>
-          <% }) %>
-        </ul>
-        <p class="empty hand" hidden>nothing hanging here… try another mood</p>
+  <section id="memory-board" class="pinboard" aria-labelledby="pinboard-title">
+    <div class="pinboard-heading">
+      <div>
+        <p class="kicker">a little shuffle of the things I love</p>
+        <h2 id="pinboard-title" class="hand">the picture rail</h2>
+        <p id="pinboard-status" class="pinboard-status" aria-live="polite"><%= sections[0].pins[0].caption %> · <%= sections[0].title %></p>
       </div>
-      <button class="door door-left"  type="button" data-toggle-closet aria-label="Toggle closet doors"><span class="hand">open me</span></button>
-      <button class="door door-right" type="button" data-toggle-closet aria-label="Toggle closet doors"></button>
+      <div class="pinboard-controls">
+        <button id="previous-pin" class="btn" type="button" aria-label="Previous photo">←</button>
+        <button id="shuffle-board" class="btn" type="button">shuffle</button>
+        <button id="pause-board" class="btn" type="button" aria-pressed="false">pause</button>
+        <button id="next-pin" class="btn" type="button" aria-label="Next photo">→</button>
+      </div>
     </div>
-  </section>
-
-  <section id="shelf" class="shelf-wrap">
-    <h2 class="hand">top shelf</h2>
-    <p class="sub">tap a lid to lift it. boxes hold the pins that belong together.</p>
-    <b class="anno" style="top:4px;right:4%">③ boxes = grouped pins / mini collections</b>
-    <div class="shelf">
-      <% boxes.forEach((m) => { %>
-        <article class="box" data-mood="<%= m.mood %>">
-          <button class="lid" type="button" aria-expanded="false"><span class="hand"><%= m.title %></span></button>
-          <div class="box-body">
-            <%- include('partials/pin', { m }) %>
-            <p><%= m.note %></p>
-            <a class="more" href="<%= base %>memory/<%= m.id %>/">open this one →</a>
-          </div>
-        </article>
+    <div id="pin-carousel" class="pin-carousel" aria-label="Pinterest photos; the centered image is in focus">
+      <% let pinIndex = 0; %>
+      <% sections.forEach((section) => { %>
+        <% section.pins.forEach((pin) => { %>
+          <a class="pin-slide<%= pinIndex === 0 ? ' is-active' : '' %>" href="<%= section.url %>" target="_blank" rel="noopener noreferrer"
+             <%= pinIndex === 0 ? 'aria-current="true"' : '' %>
+             data-title="<%= pin.caption %>" data-section="<%= section.title %>">
+            <img src="<%= pin.image %>" alt="<%= pin.alt %>" loading="lazy">
+            <span class="pin-caption">
+              <span class="pin-caption-title"><%= pin.caption %></span>
+              <span class="pin-caption-section"><%= section.title %></span>
+            </span>
+          </a>
+          <% pinIndex += 1; %>
+        <% }) %>
       <% }) %>
     </div>
-    <div class="plank"></div>
+    <p class="pinboard-note">The picture rail shuffles every 10 seconds; only the center photo stays sharp. <a id="pinboard-link" href="<%= sections[0].url %>" target="_blank" rel="noopener noreferrer">Open this collection on Pinterest ↗</a></p>
   </section>
 
-  <section id="dresser" class="dresser-wrap">
-    <h2 class="hand">the dresser</h2>
-    <p class="sub">pull a drawer. things stored flat live here.</p>
-    <b class="anno" style="top:4px;right:4%">④ drawers = accordion / flat pins</b>
-    <div class="dresser">
-      <% drawers.forEach((m) => { %>
-        <div class="drawer">
-          <button class="front" type="button" aria-expanded="false">
-            <span class="hand"><%= m.title %></span><i class="knob"></i>
-          </button>
-          <div class="inside">
-            <div class="minis">
-              <% memories.filter((pin) => pin.mood === m.mood).slice(0, 3).forEach((pin) => { %>
-                <%- include('partials/pin', { m: pin, mini: true }) %>
-              <% }) %>
-            </div>
-            <p><%= m.note %> <a class="more" href="<%= base %>memory/<%= m.id %>/">open →</a></p>
+  <section id="sections" class="sections">
+    <h2 class="hand">explore the collections</h2>
+    <div class="section-grid">
+      <% sections.forEach((section, index) => { %>
+        <a class="section-card section-card--<%= section.id %>" href="<%= section.url %>" target="_blank" rel="noopener noreferrer">
+          <div class="section-art" aria-hidden="true">
+            <span class="section-index">0<%= index + 1 %></span>
+            <span class="section-count"><%= section.count %> pins</span>
           </div>
-        </div>
+          <div class="section-copy">
+            <h3 class="hand"><%= section.title %></h3>
+            <p><%= section.description %></p>
+            <span class="section-link">explore section ↗</span>
+          </div>
+        </a>
       <% }) %>
     </div>
   </section>

@@ -1,6 +1,6 @@
-# my memory closet (wireframe)
+# my memory closet
 
-EJS + Express for local dev, compiled to static HTML for GitHub Pages.
+An EJS + Express portfolio index, compiled to static HTML for GitHub Pages. It links to all four sections of the Pinterest board (112 pins total); pin images remain hosted on Pinterest.
 
     npm install
     npm start                      # live dev server on :3000
@@ -12,4 +12,9 @@ EJS + Express for local dev, compiled to static HTML for GitHub Pages.
 3. Every push to `main` builds and deploys. Site: `https://<user>.github.io/<repo>/`
    (a repo named `<user>.github.io` deploys at the root).
 
-Each pin has original local SVG artwork in `public/img/pins/`. To use your own photos, drop them in `public/img/` and set `img: '/img/file.jpg'` in `data/memories.js`.
+Section titles, counts, and links are maintained in `data/sections.js`.
+
+The home page includes the Pinterest profile image and a photo rail with
+representative images from each collection. Photos are hosted by Pinterest;
+the rail randomly centers a new image every 10 seconds, blurring the surrounding
+images. The image URLs and captions are maintained in `data/sections.js`.

@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const data = require('./data/memories');
+const data = require('./data/sections');
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -10,35 +10,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 // available in every template
 app.locals.board = data.board;
 app.locals.base = '/';
-
-const byKind = (kind) => data.memories.filter((m) => m.kind === kind);
+app.locals.sections = data.sections;
+app.locals.totalPins = data.sections.reduce((total, section) => total + section.count, 0);
 
 app.get('/', (req, res) => {
-  res.render('index', {
-    title: 'the closet',
-    moods: data.moods,
-    memories: data.memories,
-    hangers: byKind('hanger'),
-    boxes: byKind('box'),
-    drawers: byKind('drawer'),
-  });
+  res.render('index', { title: 'the closet' });
 });
 
-app.get('/memory/:id', (req, res, next) => {
-  const i = data.memories.findIndex((m) => m.id === req.params.id);
-  if (i === -1) return next();
-  const total = data.memories.length;
-  res.render('memory', {
-    title: data.memories[i].title,
-    m: data.memories[i],
-    prev: data.memories[(i - 1 + total) % total],
-    next: data.memories[(i + 1) % total],
-    related: data.memories.filter((x) => x.mood === data.memories[i].mood && x.id !== req.params.id).slice(0, 3),
-  });
-});
-
-// handy later if you wire up the Pinterest API
-app.get('/api/memories', (req, res) => res.json(data.memories));
+app.get('/api/sections', (req, res) => res.json(data.sections));
 
 app.use((req, res) => res.status(404).render('404', { title: 'empty hanger' }));
 

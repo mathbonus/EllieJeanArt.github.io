@@ -1,7 +1,7 @@
 {
   "name": "memory-closet",
   "version": "0.1.0",
-  "description": "Wireframe demo: an art-web version of the 'My Memory Closet' Pinterest board (EJS + Express)",
+  "description": "Portfolio index for the My Memory Closet Pinterest board (EJS + Express)",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
