@@ -1,0 +1,5 @@
+<% if (m.img) { %>
+  <img class="pin-img" src="<%= m.img %>" alt="<%= m.title %>" style="aspect-ratio: <%= m.ratio %>">
+<% } else { %>
+  <div class="ph" style="aspect-ratio: <%= m.ratio %>"><span>pin</span></div>
+<% } %>

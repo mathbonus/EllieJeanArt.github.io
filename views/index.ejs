@@ -1,0 +1,79 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+<main>
+  <section class="hero">
+    <p class="kicker">a board, rebuilt as a room</p>
+    <h1 class="hand">open the closet.<br><em>everything you kept is still in here.</em></h1>
+    <button class="btn" type="button" data-toggle-closet>open / close doors</button>
+  </section>
+
+  <section id="closet" class="closet-wrap">
+    <b class="anno" style="top:-6px;left:4%">① doors = intro / reveal state</b>
+
+    <div class="filters" role="group" aria-label="Filter by mood">
+      <span class="hand">sort the rail by mood:</span>
+      <% moods.forEach((mood, k) => { %>
+        <button type="button" class="chip<%= k === 0 ? ' active' : '' %>" data-mood="<%= mood %>"><%= mood %></button>
+      <% }) %>
+    </div>
+
+    <div class="closet" id="closet-box">
+      <div class="interior">
+        <div class="rail"><b class="anno" style="top:-26px;right:6px">② rail = pins hang as clothes</b></div>
+        <ul class="hangers">
+          <% hangers.forEach((m, i) => { %>
+            <%- include('partials/hanger', { m, i }) %>
+          <% }) %>
+        </ul>
+        <p class="empty hand" hidden>nothing hanging here… try another mood</p>
+      </div>
+      <button class="door door-left"  type="button" data-toggle-closet aria-label="Toggle closet doors"><span class="hand">open me</span></button>
+      <button class="door door-right" type="button" data-toggle-closet aria-label="Toggle closet doors"></button>
+    </div>
+  </section>
+
+  <section id="shelf" class="shelf-wrap">
+    <h2 class="hand">top shelf</h2>
+    <p class="sub">tap a lid to lift it. boxes hold the pins that belong together.</p>
+    <b class="anno" style="top:4px;right:4%">③ boxes = grouped pins / mini collections</b>
+    <div class="shelf">
+      <% boxes.forEach((m) => { %>
+        <article class="box" data-mood="<%= m.mood %>">
+          <button class="lid" type="button" aria-expanded="false"><span class="hand"><%= m.title %></span></button>
+          <div class="box-body">
+            <%- include('partials/pin', { m }) %>
+            <p><%= m.note %></p>
+            <a class="more" href="/memory/<%= m.id %>">open this one →</a>
+          </div>
+        </article>
+      <% }) %>
+    </div>
+    <div class="plank"></div>
+  </section>
+
+  <section id="dresser" class="dresser-wrap">
+    <h2 class="hand">the dresser</h2>
+    <p class="sub">pull a drawer. things stored flat live here.</p>
+    <b class="anno" style="top:4px;right:4%">④ drawers = accordion / flat pins</b>
+    <div class="dresser">
+      <% drawers.forEach((m) => { %>
+        <div class="drawer">
+          <button class="front" type="button" aria-expanded="false">
+            <span class="hand"><%= m.title %></span><i class="knob"></i>
+          </button>
+          <div class="inside">
+            <div class="minis">
+              <div class="ph mini"><span>pin</span></div>
+              <div class="ph mini"><span>pin</span></div>
+              <div class="ph mini"><span>pin</span></div>
+            </div>
+            <p><%= m.note %> <a class="more" href="/memory/<%= m.id %>">open →</a></p>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </section>
+</main>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,47 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+<main class="memory">
+  <p class="crumbs"><a href="/">← back to the closet</a> / <%= m.kind %></p>
+
+  <article class="memory-grid">
+    <div class="memory-pin">
+      <%- include('partials/pin', { m }) %>
+      <p class="caption hand">pin placeholder · replace with image</p>
+    </div>
+
+    <div class="memory-text">
+      <small class="kicker"><%= m.year %> · <%= m.mood %></small>
+      <h1 class="hand"><%= m.title %></h1>
+      <p class="lede"><%= m.note %></p>
+      <ul class="tags">
+        <% m.tags.forEach((t) => { %><li>#<%= t %></li><% }) %>
+      </ul>
+      <a class="btn" href="<%= board.url %>" target="_blank" rel="noopener">see the original pin ↗</a>
+      <div class="memory-lines" aria-hidden="true"><span></span><span></span><span></span></div>
+      <p class="hand scribble">write a memory here ✎</p>
+    </div>
+  </article>
+
+  <nav class="pager">
+    <a href="/memory/<%= prev.id %>">← <%= prev.title %></a>
+    <a href="/memory/<%= next.id %>"><%= next.title %> →</a>
+  </nav>
+
+  <% if (related.length) { %>
+  <section class="related">
+    <h2 class="hand">same feeling, other hangers</h2>
+    <div class="related-grid">
+      <% related.forEach((r) => { %>
+        <a class="tag-card" href="/memory/<%= r.id %>">
+          <%- include('partials/pin', { m: r }) %>
+          <strong class="hand"><%= r.title %></strong>
+          <small><%= r.year %></small>
+        </a>
+      <% }) %>
+    </div>
+  </section>
+  <% } %>
+</main>
+
+<%- include('partials/footer') %>
