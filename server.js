@@ -17,6 +17,7 @@ app.get('/', (req, res) => {
   res.render('index', {
     title: 'the closet',
     moods: data.moods,
+    memories: data.memories,
     hangers: byKind('hanger'),
     boxes: byKind('box'),
     drawers: byKind('drawer'),

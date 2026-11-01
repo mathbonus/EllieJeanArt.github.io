@@ -36,7 +36,7 @@ button{font:inherit;color:inherit;cursor:pointer}
                    linear-gradient(to bottom right,transparent calc(50% - 1px),var(--soft) 50%,transparent calc(50% + 1px))}
 .ph span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--paper);padding:0 8px;font-size:11px;text-transform:uppercase;letter-spacing:.14em}
 .pin-img{width:100%;object-fit:cover;display:block;border:var(--line)}
-.ph.mini{aspect-ratio:1/1;width:72px}
+.ph.mini,.pin-img.mini{aspect-ratio:1/1;width:72px;object-fit:cover}
 
 /* annotations */
 .anno{position:absolute;display:none;background:var(--hi);border:var(--line);padding:2px 8px;font-size:11px;z-index:12;transform:rotate(-1.5deg);white-space:nowrap}
@@ -102,13 +102,13 @@ h2{font-size:40px;margin:0}
 .inside{max-height:0;overflow:hidden;padding:0 18px;transition:max-height .45s,padding .45s}
 .drawer.open .inside{max-height:220px;padding:20px 18px 10px}
 .minis{display:flex;gap:10px}
-.minis .ph:nth-child(2){transform:rotate(-4deg)}.minis .ph:nth-child(3){transform:rotate(3deg)}
+.minis .pin-img:nth-child(2),.minis .ph:nth-child(2){transform:rotate(-4deg)}
+.minis .pin-img:nth-child(3),.minis .ph:nth-child(3){transform:rotate(3deg)}
 
 /* ===== MEMORY PAGE ===== */
 .crumbs{padding-top:26px;color:var(--soft)}
 .memory-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:40px;margin-top:10px;align-items:start}
 .memory-pin{border:var(--line);padding:14px;background:#fff;box-shadow:6px 6px 0 var(--ink);transform:rotate(-1.2deg)}
-.caption{margin:8px 0 0;font-size:20px;color:var(--soft);text-align:center}
 .memory-text h1{font-size:clamp(44px,6vw,72px);line-height:.95;margin:4px 0 14px}
 .lede{font-size:16px;max-width:46ch}
 .tags{list-style:none;padding:0;display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 22px}

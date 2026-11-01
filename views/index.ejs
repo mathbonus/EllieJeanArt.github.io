@@ -64,9 +64,9 @@
           </button>
           <div class="inside">
             <div class="minis">
-              <div class="ph mini"><span>pin</span></div>
-              <div class="ph mini"><span>pin</span></div>
-              <div class="ph mini"><span>pin</span></div>
+              <% memories.filter((pin) => pin.mood === m.mood).slice(0, 3).forEach((pin) => { %>
+                <%- include('partials/pin', { m: pin, mini: true }) %>
+              <% }) %>
             </div>
             <p><%= m.note %> <a class="more" href="<%= base %>memory/<%= m.id %>/">open →</a></p>
           </div>

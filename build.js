@@ -27,7 +27,7 @@ const write = (file, html) => {
   const by = (k) => data.memories.filter((m) => m.kind === k);
 
   write('index.html', await render('index', {
-    title: 'the closet', moods: data.moods,
+    title: 'the closet', moods: data.moods, memories: data.memories,
     hangers: by('hanger'), boxes: by('box'), drawers: by('drawer'),
   }));
 

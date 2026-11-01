@@ -1,5 +1,5 @@
 <% if (m.img) { %>
-  <img class="pin-img" src="<%= m.img.startsWith("/") ? base + m.img.slice(1) : m.img %>" alt="<%= m.title %>" style="aspect-ratio: <%= m.ratio %>">
+  <img class="pin-img<%= typeof mini !== 'undefined' && mini ? ' mini' : '' %>" src="<%= m.img.startsWith("/") ? base + m.img.slice(1) : m.img %>" alt="<%= m.title %>" style="aspect-ratio: <%= typeof mini !== 'undefined' && mini ? '1/1' : m.ratio %>">
 <% } else { %>
-  <div class="ph" style="aspect-ratio: <%= m.ratio %>"><span>pin</span></div>
+  <div class="ph<%= typeof mini !== 'undefined' && mini ? ' mini' : '' %>" style="aspect-ratio: <%= typeof mini !== 'undefined' && mini ? '1/1' : m.ratio %>"><span>pin</span></div>
 <% } %>

@@ -12,4 +12,4 @@ EJS + Express for local dev, compiled to static HTML for GitHub Pages.
 3. Every push to `main` builds and deploys. Site: `https://<user>.github.io/<repo>/`
    (a repo named `<user>.github.io` deploys at the root).
 
-Real pin images: drop files in `public/img/` and set `img: '/img/file.jpg'` in `data/memories.js`.
+Each pin has original local SVG artwork in `public/img/pins/`. To use your own photos, drop them in `public/img/` and set `img: '/img/file.jpg'` in `data/memories.js`.
